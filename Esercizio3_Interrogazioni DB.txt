@@ -1,0 +1,95 @@
+3. Successivamente creare le seguenti interrogazioni per mezzo di T-SQL:
+
+  a. Visualizzare tutti gli impiegati oltre i 29 anni; 
+
+  SELECT *
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+  WHERE Eta > 29
+
+
+  b. Visualizzare tutti gli impiegati con un reddito di almeno 800 euro mensili;
+
+  SELECT *
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+  WHERE Reddito_Mensile >= 800 
+
+
+  c. Visualizzare tutti gli impiegati che posseggono la detrazione fiscale; 
+
+  SELECT *
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+  WHERE Detrazione_Fiscale = 1
+  
+
+  d. Visualizzare tutti gli impiegati che non posseggono la detrazione fiscale; 
+  
+  SELECT *
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+  WHERE Detrazione_Fiscale = 0
+
+
+  e. Visualizzare tutti gli impiegati cui il cognome cominci con una lettera G e li visualizzi in ordine alfabetico; 
+
+  SELECT *
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+  WHERE Cognome Like 'G%'
+  ORDER BY Cognome
+
+
+  f. Visualizzare il numero totale degli impiegati registrati nella base dati; 
+
+  SELECT COUNT (*) as Numero_Totale_Impiegati
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+
+
+  g. Visualizzare il totale dei redditi mensili di tutti gli impiegati; 
+
+  SELECT SUM(Reddito_Mensile) as Totale_Redditi_Mensili
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+
+
+  h. Visualizzare la media dei redditi mensili di tutti gli impiegati; 
+
+  SELECT AVG(Reddito_Mensile) as Media_Redditi_Mensili
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+
+
+  i. Visualizzare l’importo del reddito mensile maggiore; 
+
+  SELECT MAX(Reddito_Mensile) as Reddito_Mensile_Maggiore
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+
+
+  j. Visualizzare l’importo del reddito mensile minore;
+
+  SELECT MIN(Reddito_Mensile) as Reddito_Mensile_Minore
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+
+
+  k. Visualizzare gli impiegati assunti dall’ 01/01/2007 all’ 01/01/2008; 
+
+  SELECT *
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+  WHERE Data_Assunzione BETWEEN '2007-01-01' AND '2008-01-01'
+
+
+  l. Tramite una query parametrica che identifichi il tipo di impiego, visualizzare tutti gli impiegati che corrispondono a quel tipo di          impiego; 
+
+    CREATE PROCEDURE VisualizzaImpiegatiPerTipoImpiego
+      @TipoImpiego NVARCHAR(50)
+  AS
+  BEGIN
+    SELECT *
+    FROM IMPIEGATO i
+    INNER JOIN IMPIEGO ig ON i.IDImpiego = ig.IDImpiego
+    WHERE ig.TipoImpiego = @TipoImpiego;
+  END;
+
+  EXEC VisualizzaImpiegatiPerTipoImpiego @TipoImpiego = 'Sviluppatore';
+
+
+  m. Visualizzare l’età media dei lavoratori all’interno dell’azienda. 
+
+  SELECT AVG(Eta) as Eta_media_lavoratori
+  FROM [Esercizio_L4_S2_BackEnd].[dbo].[IMPIEGATO]
+

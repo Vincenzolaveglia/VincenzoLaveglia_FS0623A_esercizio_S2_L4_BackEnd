@@ -1,0 +1,58 @@
+4. Creare una StoredProcedure per ognuna di queste azioni: 
+
+
+  a. Memorizzazione di un nuovo impiegato 
+
+CREATE PROCEDURE MemorizzaNuovoImpiegato
+    @Cognome NVARCHAR(50),
+    @Nome NVARCHAR(50),
+    @DataAssunzione DATE,
+    @CodiceFiscale NVARCHAR(20),
+    @Eta INT,
+    @RedditoMensile DECIMAL(10,2),
+    @DetrazioneFiscale BIT,
+    @IdImpiego INT
+AS
+BEGIN
+    INSERT INTO IMPIEGATO (Cognome, Nome, Data_Assunzione, Codice_Fiscale, Eta, Reddito_Mensile, Detrazione_Fiscale, IdImpiego)
+    VALUES (@Cognome, @Nome, @DataAssunzione, @CodiceFiscale, @Eta, @RedditoMensile, @DetrazioneFiscale, @IdImpiego);
+END;
+
+
+  b. Aggiornamento di un nuovo impiegato  
+
+CREATE PROCEDURE AggiornaImpiegato
+    @IDImpiegato INT,
+    @Cognome NVARCHAR(50),
+    @Nome NVARCHAR(50),
+    @DataAssunzione DATE,
+    @CodiceFiscale NVARCHAR(20),
+    @Eta INT,
+    @RedditoMensile DECIMAL(10,2),
+    @DetrazioneFiscale BIT,
+    @IdImpiego INT
+AS
+BEGIN
+    UPDATE IMPIEGATO
+    SET Cognome = @Cognome,
+        Nome = @Nome,
+        Data_Assunzione = @DataAssunzione,
+        Codice_Fiscale = @CodiceFiscale,
+        Eta = @Eta,
+        Reddito_Mensile = @RedditoMensile,
+        Detrazione_Fiscale = @DetrazioneFiscale,
+        IdImpiego = @IdImpiego
+    WHERE IDImpiegato = @IDImpiegato;
+END;
+
+
+  c. Eliminazione di un impiegato 
+
+CREATE PROCEDURE EliminaImpiegato
+    @IDImpiegato INT
+AS
+BEGIN
+    DELETE FROM IMPIEGATO
+    WHERE IDImpiegato = @IDImpiegato;
+END;
+
